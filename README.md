@@ -33,3 +33,34 @@
   - equals가 두 객체를 같다고 판단했다면 두 객체의 hashCode는 똑같은 값을 반환해야한다.
   - equals가 두 객체를 다르다고 판단했더라도 두 객체의 hashCode가 서로 다른 값을 반환할 필요는 없다. 단 다른 객체에 대해서는 다른 값을 반환해야 해시테이블 성능이 좋아진다.
 
+- 구현방법
+  - 1.int 변수 result를 선언한 후 값 c로 초기화한다. c는 해당 객체의 첫번째 핵심 필드를 단계 2.a 방식으로 계산한 해시코드다.
+  - 2.해당 객체의 나머지 핵심 필드 각각에 대해 다음 작업을 수행한다.
+    - a. 해당 필드의 해시코드 c를 계산
+      - 기본 타입 필드 : Type.hashCode(f)를 수행한다. 여기서 Type은 해당 기본 타입의 박싱 클래스다.
+      - 참조 타입 필드 : 
+      - 배열 필드 : 모든 원소가 핵심 원소라면 Arrays.hashCode를 사용
+    - b. 단계 2.a에서 계산한 해시코드 c로 result를 갱신. (result = 31 * result + c)
+  - 3.result를 반환한다.
+- 예제
+  ```
+    int result = grade.hashCode();
+    result = 31 * result + school.hashCode();
+    result = 31 * result + Integer.hashCode(grade);
+    result = 31 * result + Integer.hashCode(group);
+    result = 31 * result + Integer.hashCode(num);
+    return result;
+  ```
+
+
+
+
+
+
+
+
+
+
+
+
+
