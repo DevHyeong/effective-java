@@ -26,3 +26,10 @@
     - float와 double 필드는 정적 메서드인 compare 메서드 활용(equals 메서드는 성능상 좋지 않다.)
     
 ### 아이템 11. equals를 재정의하려거든 hashCode도 재정의하라
+
+- equals를 재정의한 클래스 모두에서 hashCode도 재정의해야한다. 그렇지 않으면 hashCode 일반 규약을 어기게 되어 해당 클래스의 인스턴스를 HashMap이나 HashSet 같은 컬렉션의 원소로 사용할 때 문제를 일으킨다.
+- hashCode에 대한 Object 명세 (https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html)
+  - equals 비교에 사용되는 필드정보가 변경되지 않았다면 그 객체의 hashCode 메서드는 몇번을 호출해도 항상 같은 값을 반환한다(애플리케이션 재실행은 제외)
+  - equals가 두 객체를 같다고 판단했다면 두 객체의 hashCode는 똑같은 값을 반환해야한다.
+  - equals가 두 객체를 다르다고 판단했더라도 두 객체의 hashCode가 서로 다른 값을 반환할 필요는 없다. 단 다른 객체에 대해서는 다른 값을 반환해야 해시테이블 성능이 좋아진다.
+
